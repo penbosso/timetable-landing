@@ -1,0 +1,125 @@
+<h1 class="text-cente">
+  {{pageTitle}}
+</h1>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-1">
+    <h4>Filter by:</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <h2 class="">Mondays</h2>
+    <div class="card-columns" *ngIf='schedules && schedules.length'>
+      <div *ngFor='let schedule of schedules'>
+        <div class="card shadow-sm"  *ngIf='schedule.day == "Monday"'>
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">
+            {{ schedule.course.code }}- {{ schedule.course.title }}
+            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+          </h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ schedule.start_time }}-{{ schedule.end_time }}</h3>
+          <ul class="list-unstyled">
+            <li>Venue: {{schedule.venue}}</li>
+            <li>Lecturer: {{schedule.lecturer}}</li>
+
+          </ul>
+          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <h2>Tuesdays</h2>
+    <div class="card-columns" *ngIf='schedules && schedules.length'>
+      <div *ngFor='let schedule of schedules'>
+        <div class="card shadow-sm"  *ngIf='schedule.day == "Tuesday"'>
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">
+            {{ schedule.course.code }}- {{ schedule.course.title }}
+            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+          </h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ schedule.start_time }}-{{ schedule.end_time }}</h3>
+          <ul class="list-unstyled">
+            <li>Venue: {{schedule.venue}}</li>
+            <li>Lecturer: {{schedule.lecturer}}</li>
+
+          </ul>
+          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <h2>Wednesdays</h2>
+    <div class="card-columns" *ngIf='schedules && schedules.length'>
+      <div *ngFor='let schedule of schedules'>
+        <div class="card shadow-sm"  *ngIf='schedule.day == "Wednesday"'>
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">
+            {{ schedule.course.code }}- {{ schedule.course.title }}
+            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+          </h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ schedule.start_time }}-{{ schedule.end_time }}</h3>
+          <ul class="list-unstyled">
+            <li>Venue: {{schedule.venue}}</li>
+            <li>Lecturer: {{schedule.lecturer}}</li>
+
+          </ul>
+          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <h2>Thursdays</h2>
+    <div class="card-columns" *ngIf='schedules && schedules.length'>
+      <div *ngFor='let schedule of schedules'>
+        <div class="card shadow-sm"  *ngIf='schedule.day == "Thursday"'>
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">
+            {{ schedule.course.code }}- {{ schedule.course.title }}
+            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+          </h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ schedule.start_time }}-{{ schedule.end_time }}</h3>
+          <ul class="list-unstyled">
+            <li>Venue: {{schedule.venue}}</li>
+            <li>Lecturer: {{schedule.lecturer}}</li>
+
+          </ul>
+          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <h2>Fridays</h2>
+    <div class="card-columns" *ngIf='schedules && schedules.length'>
+      <div *ngFor='let schedule of schedules'>
+        <div class="card shadow-sm"  *ngIf='schedule.day == "Friday"'>
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">
+            {{ schedule.course.code }}- {{ schedule.course.title }}
+            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+          </h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">{{ schedule.start_time }}-{{ schedule.end_time }}</h3>
+          <ul class="list-unstyled">
+            <li>Venue: {{schedule.venue}}</li>
+            <li>Lecturer: {{schedule.lecturer}}</li>
+
+          </ul>
+          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
