@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { ISchedule } from './schedule';
 
 @Component({
   selector: 'pm-schedules',
@@ -6,7 +7,18 @@ import {Component} from '@angular/core';
 })
 export class ScheduleListComponent {
   pageTitle: string = 'Class Schedule List';
-  schedules: any[] = [
+  _listFilter: string;
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredSchedules = this.listFilter ? this.performFilterByLevel(this.listFilter) : this.schedules;
+  }
+
+  filteredSchedules: ISchedule[];
+
+  schedules: ISchedule[] = [
     {
     _id: "5d2d5a4a2ac1a4387ce09a84",
     venue: "Software Lab",
@@ -260,4 +272,15 @@ export class ScheduleListComponent {
     __v: 0
     }
     ];
-}
+
+  constructor() {
+    this.filteredSchedules = this.schedules;
+    this.listFilter = '';
+  }
+
+  performFilterByLevel(filterBy: string): ISchedule[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.schedules.filter((schedule: ISchedule) =>
+        schedule.course.code.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+  }
