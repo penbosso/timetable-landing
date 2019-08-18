@@ -3,7 +3,6 @@ import {Component, OnInit} from '@angular/core';
 import { ISchedule } from './schedule';
 
 @Component({
-  selector: 'pm-schedules',
   templateUrl: './schedule-list.html'
 })
 export class ScheduleListComponent implements OnInit{
@@ -36,8 +35,8 @@ export class ScheduleListComponent implements OnInit{
   ngOnInit(): void {
     this.scheduleService.getSchedules().subscribe(
       schedules => {
-        this.schedules = schedules
-        this.filteredSchedules = this.schedules
+        this.schedules = schedules;
+        this.filteredSchedules = this.schedules;
       },
       error => this.errorMessage = <any>error
     );

@@ -1,20 +1,20 @@
-<h1 class="text-cente">
-  {{pageTitle}}
-</h1>
+<div class='card-header text-center'>
+    <h4>{{pageTitle}}</h4>
+</div>
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-1">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
     <h4>Filter by:</h4>
   </div>
-  <div class='col-md-1'>
+  <div class='col-sm-1'>
     <input type='text' maxlength="10"
           [(ngModel)]='listFilter'
           placeholder="course code"/>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10">
     <h2 class="">Mondays</h2>
     <div class="card-columns" *ngIf='schedules && schedules.length'>
       <div *ngFor='let schedule of filteredSchedules'>
@@ -22,7 +22,7 @@
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">
             {{ schedule.course.code }}- {{ schedule.course.title }}
-            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+            <small><em class="small mute" *ngIf='schedule.group'>Group: {{ schedule.group }}</em></small>
           </h4>
         </div>
         <div class="card-body">
@@ -32,7 +32,7 @@
             <li>Lecturer: {{schedule.lecturer}}</li>
 
           </ul>
-          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+          <a [routerLink]="['/schedules', schedule._id]" class="btn btn-lg btn-block btn-outline-primary" >more details</a>
         </div>
       </div>
       </div>
@@ -44,7 +44,7 @@
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">
             {{ schedule.course.code }}- {{ schedule.course.title }}
-            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+            <small><em class="small mute" *ngIf='schedule.group'>Group: {{ schedule.group }}</em></small>
           </h4>
         </div>
         <div class="card-body">
@@ -54,7 +54,7 @@
             <li>Lecturer: {{schedule.lecturer}}</li>
 
           </ul>
-          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+          <a [routerLink]="['/schedules', schedule._id]" class="btn btn-lg btn-block btn-outline-primary" >more details</a>
         </div>
       </div>
       </div>
@@ -66,7 +66,7 @@
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">
             {{ schedule.course.code }}- {{ schedule.course.title }}
-            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+            <small><em class="small mute" *ngIf='schedule.group'>Group: {{ schedule.group }}</em></small>
           </h4>
         </div>
         <div class="card-body">
@@ -76,7 +76,7 @@
             <li>Lecturer: {{schedule.lecturer}}</li>
 
           </ul>
-          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+          <a [routerLink]="['/schedules', schedule._id]" class="btn btn-lg btn-block btn-outline-primary" >more details</a>
         </div>
       </div>
       </div>
@@ -88,7 +88,7 @@
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">
             {{ schedule.course.code }}- {{ schedule.course.title }}
-            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+            <small><em class="small mute" *ngIf='schedule.group'>Group: {{ schedule.group }}</em></small>
           </h4>
         </div>
         <div class="card-body">
@@ -98,7 +98,7 @@
             <li>Lecturer: {{schedule.lecturer}}</li>
 
           </ul>
-          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+          <a [routerLink]="['/schedules', schedule._id]" class="btn btn-lg btn-block btn-outline-primary" >more details</a>
         </div>
       </div>
       </div>
@@ -110,7 +110,7 @@
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">
             {{ schedule.course.code }}- {{ schedule.course.title }}
-            <small><em class="small mute" *ngIf='schedule.group == "A"'>Group: {{ schedule.group }}</em></small>
+            <small><em class="small mute" *ngIf='schedule.group'>Group: {{ schedule.group }}</em></small>
           </h4>
         </div>
         <div class="card-body">
@@ -120,11 +120,11 @@
             <li>Lecturer: {{schedule.lecturer}}</li>
 
           </ul>
-          <button class="btn btn-lg btn-block btn-outline-primary" type="button">more details</button>
+          <a [routerLink]="['/schedules', schedule._id]" class="btn btn-lg btn-block btn-outline-primary" >more details</a>
         </div>
       </div>
       </div>
     </div>
   </div>
-  <div class="col-md-1"></div>
+  <div class="col-sm-1"></div>
 </div>

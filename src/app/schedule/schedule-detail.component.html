@@ -1,0 +1,88 @@
+<div class='card'>
+  <div class='card-header text-center'>
+    <h4>{{ pageTitle }}</h4>
+  </div>
+
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-6'>
+        <div class='row'>
+          <div class='col-md-4'*ngIf="schedule">Course Code:</div>
+          <div class='col-md-8'>{{schedule.course.code}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Course Title:</div>
+          <div class='col-md-8'>{{schedule.course.title}}</div>
+        </div>
+        <div class='row'  *ngIf='schedule.group'>
+          <div class='col-md-4' >Group:</div>
+          <div class='col-md-8'>{{schedule.group}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Time:</div>
+          <div class='col-md-8'>{{ schedule.start_time }}-{{ schedule.end_time }}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Day:</div>
+          <div class='col-md-8'>{{schedule.day}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Venue:</div>
+          <div class='col-md-8'>{{schedule.venue}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Lecturer:</div>
+          <div class='col-md-8'>{{schedule.lecturer}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Description:</div>
+          <div class='col-md-8'>{{schedule.course.description}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Department:</div>
+          <div class='col-md-8'>{{schedule.course.department}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Level:</div>
+          <div class='col-md-8'>{{schedule.course.level}}</div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>Date Creaded:</div>
+          <div class='col-md-8'>{{schedule.date_created}}</div>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class="card-columns" *ngIf='similarSchedules && similarSchedules.length'>
+          <div *ngFor='let similarSchedule of similarSchedules'>
+            <div class="card shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">
+                  {{ similarSchedule.course.code }}- {{ similarSchedule.course.title }}
+                  <small><em class="small mute" *ngIf='similarSchedule.group'>Group: {{ similarSchedule.group }}</em></small>
+                </h4>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{ similarSchedule.start_time }}-{{ similarSchedule.end_time }}</h3>
+                <ul class="list-unstyled">
+                  <li>Venue: {{similarSchedule.venue}}</li>
+                  <li>Lecturer: {{similarSchedule.lecturer}}</li>
+
+                </ul>
+                <a [routerLink]="['/schedules', similarSchedule._id]" class="btn btn-lg btn-block btn-outline-primary" >more details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='card-footer'>
+    <button class='btn btn-outline-secondary'
+            (click)='onBack()'
+            style='width:80px'>
+      <i class='fa fa-chevron-left'></i> Back
+    </button>
+  </div>
+</div>

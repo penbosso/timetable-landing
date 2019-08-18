@@ -1,7 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-
-  <pm-schedules></pm-schedules>
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <h3><a class="navbar-band">{{ pageTitle }}</a></h3>
+  <ul class="nav nav-pills">
+    <li><a class="nav-link" [routerLink]="['/welcome']">Home</a></li>
+    <li><a class="nav-link" [routerLink]="['/schedules']">Schedule list</a></li>
+  </ul>
+</nav>
+<div >
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>
