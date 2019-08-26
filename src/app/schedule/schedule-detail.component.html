@@ -6,8 +6,9 @@
   <div class='card-body'>
     <div class='row'>
       <div class='col-md-6'>
+        <div *ngIf="schedule">
         <div class='row'>
-          <div class='col-md-4'*ngIf="schedule">Course Code:</div>
+          <div class='col-md-4'>Course Code:</div>
           <div class='col-md-8'>{{schedule.course.code}}</div>
         </div>
         <div class='row'>
@@ -51,6 +52,7 @@
           <div class='col-md-8'>{{schedule.date_created}}</div>
         </div>
       </div>
+    </div>
 
       <div class='col-md-6'>
         <div class="card-columns" *ngIf='similarSchedules && similarSchedules.length'>

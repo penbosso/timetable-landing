@@ -14,7 +14,7 @@
 </div>
 <div class="row">
   <div class="col-sm-1"></div>
-  <div class="col-sm-10">
+  <div class="col-sm-10" *ngIf='schedules && schedules.length'>
     <h2 class="">Mondays</h2>
     <div class="card-columns" *ngIf='schedules && schedules.length'>
       <div *ngFor='let schedule of filteredSchedules'>
@@ -126,5 +126,9 @@
       </div>
     </div>
   </div>
+  <!-- Loding icon -->
+  <div class="text-center fa fa-spinner fa-spin" style="font-size:240px" *ngIf='schedules.length==0'>
+  </div>
+
   <div class="col-sm-1"></div>
 </div>
