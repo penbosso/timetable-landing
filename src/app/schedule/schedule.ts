@@ -1,6 +1,7 @@
-import { ICourse } from './course';
+import { Course } from './course';
 
-export interface ISchedule {
+
+export class Schedule {
   _id: string;
   venue: string;
   lecturer: string;
@@ -10,5 +11,5 @@ export interface ISchedule {
   end_time: string;
   date_created: string;
   __v: number;
-  course: ICourse;
+  course: Course;
 }

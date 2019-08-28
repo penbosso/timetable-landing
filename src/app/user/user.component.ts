@@ -1,8 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, AbstractControl} from '@angular/forms';
 
 import { User } from './user';
+
+function confirmPassword(c: AbstractControl): {[key: string]: boolean } | null {
+  let confirmControl = c.get('confirmPassword');
+  let passwordControl = c.get('password');
+
+  if (confirmControl.pristine || passwordControl.pristine) {
+    return null;
+  }
+  
+  if (passwordControl.value !== confirmControl.value) {
+    return { 'match': true};
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-user',
@@ -20,8 +34,10 @@ export class UserComponent implements OnInit {
       otherName: '',
       lastName: '',
       email: '',
-      password: '',
-      confirmPassword: ''
+      passwordGroup: this.fb.group({
+        password: '',
+        confirmPassword: ''
+      }, {validator: confirmPassword})
     });
   }
 

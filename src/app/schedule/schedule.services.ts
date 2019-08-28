@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ISchedule } from './schedule';
+import { Schedule } from './schedule';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import {catchError, tap} from 'rxjs/operators'
@@ -13,8 +13,8 @@ export class ScheduleService {
    constructor(private http: HttpClient) {
 
    }
-  getSchedules(): Observable<ISchedule[]> {
-    return this.http.get<ISchedule[]>(this.scheduleUrl).pipe(
+  getSchedules(): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(this.scheduleUrl).pipe(
       // tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );

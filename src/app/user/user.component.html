@@ -91,30 +91,37 @@
               <label for="inputEmail">Email address</label>
             </div>
 
-            <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control"
-                      placeholder="Password" required
-                      minlength="6"
-                      formControlName="password"
-                      [ngClass]="{'is-invalid': (userForm.get('password').touched || userForm.get('password').derty) && !userForm.get('password').valid}" />
+            <div formGroupName="passwordGroup">
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control"
+                        placeholder="Password" required
+                        minlength="6"
+                        formControlName="password"
+                        [ngClass]="{'is-invalid': userForm.get('passwordGroup').errors ||
+                                                  ((userForm.get('passwordGroup.password').touched ||
+                                                  userForm.get('passwordGroup.password').derty) &&
+                                                  !userForm.get('passwordGroup.password').valid)}" />
+                    <span class="isvalid-feedback">
+                      <span *ngIf="userForm.get('passwordGroup.password').errors?.minlength">Password must be longer than 6 characters</span>
+                      <span *ngIf="userForm.get('passwordGroup.password').errors?.required">Please enter a valid password</span>
+                    </span>
+                <label for="inputPassword">Password</label>
+              </div>
+              <div class="form-label-group">
+                <input type="password" id="confirmPassword" class="form-control"
+                        placeholder="Password" required
+                        minlength="6"
+                        formControlName="confirmPassword"
+                        [ngClass]="{'is-invalid': userForm.get('passwordGroup').errors ||
+                                                  ((userForm.get('passwordGroup.confirmPassword').touched ||
+                                                  userForm.get('passwordGroup.confirmPassword').derty) &&
+                                                  !userForm.get('passwordGroup.confirmPassword').valid)}" />
                   <span class="isvalid-feedback">
-                    <span *ngIf="userForm.get('password').errors?.minlength">Password must be longer than 6 characters</span>
-                    <span *ngIf="userForm.get('password').errors?.required">Please enter a valid password</span>
+                    <span *ngIf="userForm.get('passwordGroup.confirmPassword').errors?.required">Please enter a valid password</span>
+                    <span *ngIf="userForm.get('passwordGroup').errors?.match">Password does not match</span>
                   </span>
-              <label for="inputPassword">Password</label>
-            </div>
-            <div class="form-label-group">
-              <input type="password" id="confirmPassword" class="form-control"
-                      placeholder="Password" required
-                      placeholder="Password" required
-                      minlength="6"
-                      formControlName="confirmPassword"
-                      [ngClass]="{'is-invalid': (userForm.get('confirmPassword').touched || userForm.get('confirmPassword').derty) && !userForm.get('confirmPassword').valid}" />
-                <span class="isvalid-feedback">
-                  <span *ngIf="userForm.get('confirmPassword').errors?.minlength">Password must be longer than 6 characters</span>
-                  <span *ngIf="userForm.get('confirmPassword').errors?.required">Please enter a valid password</span>
-                </span>
-              <label for="confirmPassword">Confirm Password</label>
+                <label for="confirmPassword">Confirm Password</label>
+              </div>
             </div>
 
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"

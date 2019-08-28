@@ -1,6 +1,6 @@
 import { ScheduleService } from './schedule.services';
 import {Component, OnInit} from '@angular/core';
-import { ISchedule } from './schedule';
+import { Schedule } from './schedule';
 
 @Component({
   templateUrl: './schedule-list.html'
@@ -18,17 +18,17 @@ export class ScheduleListComponent implements OnInit{
     this.filteredSchedules = this.listFilter ? this.performFilterByLevel(this.listFilter) : this.schedules;
   }
 
-  filteredSchedules: ISchedule[];
-  schedules: ISchedule[] = [];
+  filteredSchedules: Schedule[];
+  schedules: Schedule[] = [];
 
 
   constructor(private scheduleService: ScheduleService) {
 
   }
 
-  performFilterByLevel(filterBy: string): ISchedule[] {
+  performFilterByLevel(filterBy: string): Schedule[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.schedules.filter((schedule: ISchedule) =>
+    return this.schedules.filter((schedule: Schedule) =>
         schedule.course.code.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 

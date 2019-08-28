@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ISchedule } from './schedule';
+import { Schedule } from './schedule';
 import { ScheduleService } from './schedule.services';
 
 @Component({
@@ -12,8 +12,8 @@ import { ScheduleService } from './schedule.services';
 export class ScheduleDetailComponent implements OnInit {
   pageTitle: string = 'Schedule Detail';
   errorMessage: string;
-  schedule: ISchedule;
-  similarSchedules: ISchedule[] = [];
+  schedule: Schedule;
+  similarSchedules: Schedule[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -32,12 +32,12 @@ export class ScheduleDetailComponent implements OnInit {
     );
   }
 
-  filterByCourseId(courseId: string): ISchedule[] {
-    return this.similarSchedules.filter((schedule: ISchedule) => schedule.course._id.indexOf(courseId) !== -1);
+  filterByCourseId(courseId: string): Schedule[] {
+    return this.similarSchedules.filter((schedule: Schedule) => schedule.course._id.indexOf(courseId) !== -1);
   }
 
-  findById(id: string, schedules: ISchedule[]): ISchedule {
-    return schedules.find((schedule: ISchedule) => schedule._id === id );
+  findById(id: string, schedules: Schedule[]): Schedule {
+    return schedules.find((schedule: Schedule) => schedule._id === id );
   }
 
   onBack(): void {

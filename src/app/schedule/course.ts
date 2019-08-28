@@ -1,4 +1,4 @@
-export interface ICourse {
+export class Course {
   _id: string;
   code: string;
   title: string;
