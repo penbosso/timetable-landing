@@ -1,10 +1,12 @@
 export class Course {
   _id: string;
-  code: string;
-  title: string;
-  description: string;
-  level: string;
-  department: string;
-  user: string;
   __v: number;
+  constructor(
+    public code?: string,
+    public title?: string,
+    public description?: string,
+    public level?: string,
+    public department?: string,
+    public user?: string
+  ) { }
 }

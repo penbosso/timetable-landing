@@ -10,10 +10,9 @@
             <div class="form-label-group">
               <input type="email" id="inputEmail" class="form-control"
                       placeholder="Email address" required autofocus
-                      placeholder="Email address" required
                       formControlName="email"
                       [ngClass]="{'is-invalid': (userForm.get('email').touched || userForm.get('email').derty) && !userForm.get('email').valid}" />
-                  <span class="isvalid-feedback">
+                  <span class="invalid-feedback">
                       <span *ngIf="userForm.get('email').errors">Please enter a valid email</span>
                   </span>
               <label for="inputEmail">Email address</label>
@@ -25,7 +24,7 @@
                       minlength="6"
                       formControlName="password"
                       [ngClass]="{'is-invalid': (userForm.get('password').touched || userForm.get('password').derty) && !userForm.get('password').valid}" />
-                  <span class="isvalid-feedback">
+                  <span class="invalid-feedback">
                     <span *ngIf="userForm.get('password').errors?.minlength">Password must be longer than 6 characters</span>
                     <span *ngIf="userForm.get('password').errors?.required">Please enter a valid password</span>
                   </span>
@@ -62,7 +61,7 @@
                       minlength="3"
                       formControlName="lastName"
                       [ngClass]="{'is-invalid': (userForm.get('lastName').touched || userForm.get('lastName').dirty) && !userForm.get('lastName').valid}"/>
-                <span class="isvalid-feedback">
+                <span class="invalid-feedback">
                   <span *ngIf="userForm.get('lastName').errors?.required">Please enter your last name</span>
                   <span *ngIf="userForm.get('lastName').errors?.minlength">Name must be longer than 3 characters</span>
                 </span>
@@ -74,7 +73,7 @@
                       minlength="3"
                       formControlName="otherName"
                       [ngClass]="{'is-invalid': (userForm.get('otherName').touched || userForm.get('otherName').dirt) && !userForm.get('otherName').valid}"/>
-                <span class="isvalid-feedback">
+                <span class="invalid-feedback">
                   <span *ngIf="userForm.get('otherName').errors?.required">Please enter your name</span>
                   <span *ngIf="userForm.get('otherName').errors?.minlength">Name must be longer than 3 characters</span>
                 </span>
@@ -85,7 +84,7 @@
                       placeholder="Email address" required
                       formControlName="email"
                       [ngClass]="{'is-invalid': (userForm.get('email').touched || userForm.get('email').derty) && !userForm.get('email').valid}" />
-                      <span class="isvalid-feedback">
+                      <span class="invalid-feedback">
                           <span *ngIf="userForm.get('email').errors">Please enter a valid email</span>
                       </span>
               <label for="inputEmail">Email address</label>
@@ -101,7 +100,7 @@
                                                   ((userForm.get('passwordGroup.password').touched ||
                                                   userForm.get('passwordGroup.password').derty) &&
                                                   !userForm.get('passwordGroup.password').valid)}" />
-                    <span class="isvalid-feedback">
+                    <span class="invalid-feedback">
                       <span *ngIf="userForm.get('passwordGroup.password').errors?.minlength">Password must be longer than 6 characters</span>
                       <span *ngIf="userForm.get('passwordGroup.password').errors?.required">Please enter a valid password</span>
                     </span>
@@ -116,7 +115,7 @@
                                                   ((userForm.get('passwordGroup.confirmPassword').touched ||
                                                   userForm.get('passwordGroup.confirmPassword').derty) &&
                                                   !userForm.get('passwordGroup.confirmPassword').valid)}" />
-                  <span class="isvalid-feedback">
+                  <span class="invalid-feedback">
                     <span *ngIf="userForm.get('passwordGroup.confirmPassword').errors?.required">Please enter a valid password</span>
                     <span *ngIf="userForm.get('passwordGroup').errors?.match">Password does not match</span>
                   </span>

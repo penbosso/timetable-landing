@@ -11,7 +11,7 @@ function confirmPassword(c: AbstractControl): {[key: string]: boolean } | null {
   if (confirmControl.pristine || passwordControl.pristine) {
     return null;
   }
-  
+
   if (passwordControl.value !== confirmControl.value) {
     return { 'match': true};
   }
@@ -34,6 +34,7 @@ export class UserComponent implements OnInit {
       otherName: '',
       lastName: '',
       email: '',
+      password: '',
       passwordGroup: this.fb.group({
         password: '',
         confirmPassword: ''
