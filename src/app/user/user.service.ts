@@ -9,7 +9,7 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class UserService {
 
-  private baseUrl = 'https://cstt.herokuapp.com/users';
+  private baseUrl = 'http://localhost:3600/users';
   constructor(private http: HttpClient) { }
 
   createUser(user: User): Observable<User> {
