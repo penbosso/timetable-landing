@@ -1,3 +1,4 @@
+import { logging } from 'protractor';
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,11 +9,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ScheduleModule } from './schedule/schedule.module';
 import { UserModule } from './user/user.module';
+import { LoginComponent } from './auth/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
