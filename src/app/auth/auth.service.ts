@@ -25,14 +25,7 @@ export class AuthService {
               alert(error.error);
               return of(false);
             })
-            );
-  }
-
-
-
-  private setSession(authResult) {
-    localStorage.setItem('accessToken', authResult.accessToken);
-    localStorage.setItem('refreshToken', authResult.refreshToken);
+          );
   }
 
   logout() {

@@ -9,13 +9,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ScheduleModule } from './schedule/schedule.module';
 import { UserModule } from './user/user.module';
-import { LoginComponent } from './auth/login.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent,
-    LoginComponent
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +26,8 @@ import { LoginComponent } from './auth/login.component';
       { path: '**', redirectTo: 'welcome', pathMatch:'full' }
     ]),
     ScheduleModule,
-    UserModule
+    UserModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

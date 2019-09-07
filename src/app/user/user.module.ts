@@ -3,19 +3,15 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from '../auth/login.component';
 
 
 
 @NgModule({
-  declarations: [
-    UserComponent,
-    LoginComponent],
+  declarations: [UserComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: 'login', component: LoginComponent },
       { path: 'signup', component: UserComponent },
     ])
   ]
