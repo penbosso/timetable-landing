@@ -51,6 +51,10 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
+  getLoggedUser() {
+    return this.loggedUser;
+  }
+
   private doLoginUser(email: string, authResult) {
     this.loggedUser = email;
     localStorage.setItem(this.JWT_TOKEN, authResult.accessToken);

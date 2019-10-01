@@ -35,6 +35,7 @@
             <div class="form-label-group">
               <input type="email" id="inputEmail" class="form-control"
                       placeholder="Email address" required
+                      pattern="/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/"
                       formControlName="email"
                       [ngClass]="{'is-invalid': (userForm.get('email').touched || userForm.get('email').derty) && !userForm.get('email').valid}" />
                       <span class="invalid-feedback">
