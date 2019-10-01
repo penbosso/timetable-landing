@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ISchedule } from './schedule';
+import { Schedule } from './schedule';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import {catchError, tap} from 'rxjs/operators'
+import {catchError} from 'rxjs/operators'
+import { config } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScheduleService {
-  private scheduleUrl = 'https://cstt.herokuapp.com/schedules';
+  private scheduleUrl =  config.apiUrl + '/schedules';
+  private similarScheduleUrl = config.apiUrl + '/schedules/similar';
 
    constructor(private http: HttpClient) {
 
    }
-  getSchedules(): Observable<ISchedule[]> {
-    return this.http.get<ISchedule[]>(this.scheduleUrl).pipe(
+  getSchedules(): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(this.scheduleUrl).pipe(
+      // tap(data => console.log("All: " + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+  getSimilarSchedules(): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(this.similarScheduleUrl).pipe(
       // tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );

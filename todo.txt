@@ -1,0 +1,2 @@
+api end point for schedule detail+ similar courses
+api end point for curd schedules and courses.

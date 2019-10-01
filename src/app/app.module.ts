@@ -1,3 +1,4 @@
+import { logging } from 'protractor';
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -5,10 +6,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ScheduleListComponent } from './schedule/schedule-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ScheduleDetailComponent } from './schedule/schedule-detail.component';
 import { ScheduleModule } from './schedule/schedule.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { ScheduleModule } from './schedule/schedule.module';
       { path: '', redirectTo: 'welcome', pathMatch:'full' },
       { path: '**', redirectTo: 'welcome', pathMatch:'full' }
     ]),
-    ScheduleModule
+    ScheduleModule,
+    UserModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

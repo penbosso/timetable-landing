@@ -1,14 +1,18 @@
-import { ICourse } from './course';
+import { Course } from './course';
 
-export interface ISchedule {
+
+export class Schedule {
   _id: string;
-  venue: string;
-  lecturer: string;
-  group: string;
-  day: string;
-  start_time: string;
-  end_time: string;
-  date_created: string;
   __v: number;
-  course: ICourse;
+  date_created;
+  constructor(
+    public venue?: string,
+    public lecturer?: string,
+    public group?: string,
+    public day?: string,
+    public start_time?: string,
+    public end_time?: string,
+    public course?: Course
+  ) {}
+
 }

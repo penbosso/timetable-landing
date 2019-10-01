@@ -1,43 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ISchedule } from './schedule';
-import { ScheduleService } from './schedule.services';
+import { Schedule } from './schedule';
+import { ScheduleService } from './schedule.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './schedule-detail.component.html',
   styleUrls: ['./schedule-detail.component.css']
 })
 
-export class ScheduleDetailComponent implements OnInit {
+export class ScheduleDetailComponent implements OnInit, OnDestroy {
   pageTitle: string = 'Schedule Detail';
   errorMessage: string;
-  schedule: ISchedule;
-  similarSchedules: ISchedule[] = [];
+  schedule: Schedule;
+  similarSchedules: Schedule[] = [];
+  private sub: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private scheduleService: ScheduleService) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    //Find schedule and filter related course from schedules
-    this.scheduleService.getSchedules().subscribe(
-      schedules => {
-        this.similarSchedules = schedules;
-        this.schedule = this.findById(id, this.similarSchedules);
-        this.similarSchedules = this.filterByCourseId(this.schedule.course._id);
-      },
-      error => this.errorMessage = <any>error
-    );
+    this.sub = this.route.paramMap.subscribe( params => {
+      const id = params.get('id');
+      //Find schedule and filter related course from schedules
+      this.scheduleService.getSchedules().subscribe(
+        schedules => {
+          this.similarSchedules = schedules;
+          this.schedule = this.findById(id, this.similarSchedules);
+          this.similarSchedules = this.filterByCourseId(this.schedule.course._id);
+        },
+        error => this.errorMessage = <any>error
+      );
+    });
+
   }
 
-  filterByCourseId(courseId: string): ISchedule[] {
-    return this.similarSchedules.filter((schedule: ISchedule) => schedule.course._id.indexOf(courseId) !== -1);
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
-  findById(id: string, schedules: ISchedule[]): ISchedule {
-    return schedules.find((schedule: ISchedule) => schedule._id === id );
+  filterByCourseId(courseId: string): Schedule[] {
+    return this.similarSchedules.filter((schedule: Schedule) => schedule.course._id.indexOf(courseId) !== -1);
+  }
+
+  findById(id: string, schedules: Schedule[]): Schedule {
+    return schedules.find((schedule: Schedule) => schedule._id === id );
   }
 
   onBack(): void {

@@ -1,0 +1,197 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Schedule Instance</h5>
+          <form class=""
+                (ngSubmit)="save()"
+                [formGroup]="scheduleForm">
+
+            <div class="form-label-group">
+                <label for="course">Course</label>
+                <select type="text" id="course" class="form-control"
+                        placeholder="course" required
+                        formControlName="course"
+                        [ngClass]="{'is-invalid': (scheduleForm.get('course').touched || scheduleForm.get('course').derty) && !scheduleForm.get('course').valid}">
+                        <option value="cscd 101">cscd 101</option>
+                </select>
+                <span class="invalid-feedback">
+                    <span *ngIf="scheduleForm.get('course').errors">Please enter a Course </span>
+                </span>
+            </div>
+
+            <div class="form-label-group">
+                <label for="end_time">Day</label>
+                <input type="day" id="day" class="form-control"
+                        required
+                        formControlName="day"
+                        [ngClass]="{'is-invalid': ((scheduleForm.get('day').touched ||
+                                                  scheduleForm.get('day').derty) &&
+                                                  !scheduleForm.get('day').valid)}" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="scheduleForm.get('day').errors?.required">Please select a valid day</span>
+                  </span>
+            </div>
+
+            <div formGroupName="dateGroup">
+              <div class="form-label-group">
+                <label for="start=time">Start time</label>
+                <input type="time" id="start_time" class="form-control"
+                        placeholder="start_date" required
+                        formControlName="start_time"
+                        [ngClass]="{'is-invalid': scheduleForm.get('dateGroup').errors ||
+                                                  ((scheduleForm.get('dateGroup.start_time').touched ||
+                                                  scheduleForm.get('dateGroup.start_time').derty) &&
+                                                  !scheduleForm.get('dateGroup.start_time').valid)}" />
+                    <span class="invalid-feedback">
+                      <span *ngIf="scheduleForm.get('dateGroup.start_time').errors?.required">Please enter a valid start time</span>
+                    </span>
+              </div>
+              <div class="form-label-group">
+                <label for="end_time">End time</label>
+                <input type="time" id="end_time" class="form-control"
+                        placeholder="End time" required
+                        formControlName="end_time"
+                        [ngClass]="{'is-invalid': scheduleForm.get('dateGroup').errors ||
+                                                  ((scheduleForm.get('dateGroup.end_time').touched ||
+                                                  scheduleForm.get('dateGroup.end_time').derty) &&
+                                                  !scheduleForm.get('dateGroup.end_time').valid)}" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="scheduleForm.get('dateGroup.end_time').errors?.required">Please enter a valid start time</span>
+                    <span *ngIf="scheduleForm.get('dateGroup').errors?.invalid_date">Start time is greater</span>
+                  </span>
+              </div>
+            </div>
+
+            <div class="form-label-group">
+                <label for="end_time">Venue</label>
+                <input type="text" id="venue" class="form-control"
+                        placeholder="Venue" required
+                        formControlName="venue"
+                        [ngClass]="{'is-invalid': ((scheduleForm.get('venue').touched ||
+                                                  scheduleForm.get('venue').derty) &&
+                                                  !scheduleForm.get('venue').valid)}" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="scheduleForm.get('venue').errors?.required">Please enter a valid venue</span>
+                  </span>
+            </div>
+
+            <div class="form-label-group">
+                <label for="end_time">Group</label>
+                <input type="text" id="group" class="form-control"
+                        placeholder="Group"
+                        formControlName="group"
+                        [ngClass]="{'is-invalid': ((scheduleForm.get('group').touched ||
+                                                  scheduleForm.get('group').derty) &&
+                                                  !scheduleForm.get('group').valid)}" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="scheduleForm.get('group').errors">Please enter a valid group</span>
+                  </span>
+            </div>
+
+            <div class="form-label-group">
+                <label for="end_time">Lecturer</label>
+                <input type="text" id="lecturer" class="form-control"
+                        placeholder="Lecturer Name" required
+                        formControlName="lecturer"
+                        [ngClass]="{'is-invalid': ((scheduleForm.get('lecturer').touched ||
+                                                  scheduleForm.get('lecturer').derty) &&
+                                                  !scheduleForm.get('lecturer').valid)}" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="scheduleForm.get('lecturer').errors?.required">Please enter a valid Lecturer name</span>
+                  </span>
+            </div>
+            <hr class="my-4">
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                    [title]="scheduleForm.valid ? 'Save your entered data' : 'Disabled until form data is valid'"
+                    [disabled]="!scheduleForm.valid">
+                    Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">New Course</h5>
+          <form class=""
+                (ngSubmit)="save()"
+                [formGroup]="courseForm" >
+            <div class="form-label-group">
+                <label for="courseCode">Course code</label>
+              <input type="text" id="courseCode" class="form-control"
+                      placeholder="Course code" required
+                      minlength="3"
+                      formControlName="code"
+                      [ngClass]="{'is-invalid': (courseForm.get('code').touched || courseForm.get('code').derty) && !courseForm.get('code').valid}" />
+                  <span class="invalid-feedback">
+                      <span *ngIf="courseForm.get('code').errors?.minlength">Course code must be longer than 3 characters</span>
+                      <span *ngIf="courseForm.get('code').errors">Please enter a Course code</span>
+                  </span>
+            </div>
+            <div class="form-label-group">
+                <label for="courseTitle">Course Title</label>
+                <input type="text" id="courseTitle" class="form-control"
+                        placeholder="Course title" required
+                        minlength="3"
+                        formControlName="title"
+                        [ngClass]="{'is-invalid': (courseForm.get('title').touched || courseForm.get('title').derty) && !courseForm.get('title').valid}" />
+                    <span class="invalid-feedback">
+                        <span *ngIf="courseForm.get('title').errors?.minlength">Course title must be longer than 3 characters</span>
+                        <span *ngIf="courseForm.get('title').errors">Please enter a Course title</span>
+                    </span>
+              </div>
+              <div class="form-label-group">
+                  <label for="courseDescription">Course Description</label>
+                  <input type="text" id="courseDescription" class="form-control"
+                          placeholder="Course description" required
+                          minlength="3"
+                          formControlName="description"
+                          [ngClass]="{'is-invalid': (courseForm.get('description').touched || courseForm.get('description').derty) && !courseForm.get('description').valid}" />
+                      <span class="invalid-feedback">
+                          <span *ngIf="courseForm.get('description').errors?.minlength">Course description must be longer than 3 characters</span>
+                          <span *ngIf="courseForm.get('description').errors">Please enter a Course description</span>
+                      </span>
+                </div>
+                <div class="form-label-group">
+                    <label for="level">Level</label>
+                    <select type="text" id="level" class="form-control"
+                            placeholder="level" required
+                            formControlName="level"
+                            [ngClass]="{'is-invalid': (courseForm.get('level').touched || courseForm.get('level').derty) && !courseForm.get('level').valid}">
+                            <option value="level 100">level 100</option>
+                            <option value="level 200">level 200</option>
+                            <option value="level 300">level 300</option>
+                            <option value="level 400">level 400</option>
+                            <option value="level 500">level 500</option>
+                            <option value="level 600">level 600</option>
+                    </select>
+                    <span class="invalid-feedback">
+                        <span *ngIf="courseForm.get('level').errors">Please enter a Course level</span>
+                    </span>
+                </div>
+                  <div class="form-label-group">
+                      <label for="department">Department</label>
+                      <input type="text" id="department" class="form-control"
+                              placeholder="Course description" required
+                              minlength="3"
+                              formControlName="department"
+                              [ngClass]="{'is-invalid': (courseForm.get('department').touched || courseForm.get('department').derty) && !courseForm.get('department').valid}" />
+                          <span class="invalid-feedback">
+                              <span *ngIf="courseForm.get('department').errors?.minlength">Department must be longer than 3 characters</span>
+                              <span *ngIf="courseForm.get('department').errors">Please enter a department</span>
+                          </span>
+                    </div>
+                    <hr class="my-4">
+            <button class="btn btn-lg btn-primary btn-block text-uppercase"
+                    type="submit" [disabled]="!courseForm.valid">Save
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

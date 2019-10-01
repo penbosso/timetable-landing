@@ -1,0 +1,89 @@
+
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Sign Up</h5>
+          <form class="form-signin"
+                  (ngSubmit)="save()"
+                  [formGroup]="userForm">
+            <div class="form-label-group">
+              <input type="text" id="lastName" class="form-control"
+                      placeholder="last name" required autofocus
+                      minlength="3"
+                      formControlName="lastName"
+                      [ngClass]="{'is-invalid': (userForm.get('lastName').touched || userForm.get('lastName').dirty) && !userForm.get('lastName').valid}"/>
+                <span class="invalid-feedback">
+                  <span *ngIf="userForm.get('lastName').errors?.required">Please enter your last name</span>
+                  <span *ngIf="userForm.get('lastName').errors?.minlength">Name must be longer than 3 characters</span>
+                </span>
+              <label for="lastName">Last name</label>
+            </div>
+            <div class="form-label-group">
+              <input type="text" id="otherName" class="form-control"
+                      placeholder="other names" required
+                      minlength="3"
+                      formControlName="otherName"
+                      [ngClass]="{'is-invalid': (userForm.get('otherName').touched || userForm.get('otherName').dirt) && !userForm.get('otherName').valid}"/>
+                <span class="invalid-feedback">
+                  <span *ngIf="userForm.get('otherName').errors?.required">Please enter your name</span>
+                  <span *ngIf="userForm.get('otherName').errors?.minlength">Name must be longer than 3 characters</span>
+                </span>
+              <label for="otherName">Other names</label>
+            </div>
+            <div class="form-label-group">
+              <input type="email" id="inputEmail" class="form-control"
+                      placeholder="Email address" required
+                      pattern="/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/"
+                      formControlName="email"
+                      [ngClass]="{'is-invalid': (userForm.get('email').touched || userForm.get('email').derty) && !userForm.get('email').valid}" />
+                      <span class="invalid-feedback">
+                          <span *ngIf="userForm.get('email').errors">Please enter a valid email</span>
+                      </span>
+              <label for="inputEmail">Email address</label>
+            </div>
+
+            <div formGroupName="passwordGroup">
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control"
+                        placeholder="Password" required
+                        minlength="6"
+                        formControlName="password"
+                        [ngClass]="{'is-invalid': userForm.get('passwordGroup').errors ||
+                                                  ((userForm.get('passwordGroup.password').touched ||
+                                                  userForm.get('passwordGroup.password').derty) &&
+                                                  !userForm.get('passwordGroup.password').valid)}" />
+                    <span class="invalid-feedback">
+                      <span *ngIf="userForm.get('passwordGroup.password').errors?.minlength">Password must be longer than 6 characters</span>
+                      <span *ngIf="userForm.get('passwordGroup.password').errors?.required">Please enter a valid password</span>
+                    </span>
+                <label for="inputPassword">Password</label>
+              </div>
+              <div class="form-label-group">
+                <input type="password" id="confirmPassword" class="form-control"
+                        placeholder="Password" required
+                        minlength="6"
+                        formControlName="confirmPassword"
+                        [ngClass]="{'is-invalid': userForm.get('passwordGroup').errors ||
+                                                  ((userForm.get('passwordGroup.confirmPassword').touched ||
+                                                  userForm.get('passwordGroup.confirmPassword').derty) &&
+                                                  !userForm.get('passwordGroup.confirmPassword').valid)}" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="userForm.get('passwordGroup.confirmPassword').errors?.required">Please enter a valid password</span>
+                    <span *ngIf="userForm.get('passwordGroup').errors?.match">Password does not match</span>
+                  </span>
+                <label for="confirmPassword">Confirm Password</label>
+              </div>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                    [title]="userForm.valid ? 'Save your entered data' : 'Disabled until form data is valid'"
+                    [disabled]="!userForm.valid">
+                    Sign up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
