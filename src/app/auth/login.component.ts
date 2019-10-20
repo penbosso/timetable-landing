@@ -10,6 +10,7 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 
 export class LoginComponent implements OnInit {
   userForm: FormGroup;
+  errorMessage: any;
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) { }
 
@@ -17,6 +18,10 @@ export class LoginComponent implements OnInit {
     this.userForm = this.fb.group({
       email: '',
       password: ''
+    });
+
+    this.authService.eventAuthError$.subscribe( data => {
+      this.errorMessage = data; console.log(this.errorMessage);
     });
   }
 

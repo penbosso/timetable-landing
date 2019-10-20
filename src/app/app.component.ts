@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { Component } from '@angular/core';
 
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   pageTitle = 'Class Schedule TimeTable';
-  constructor(public auth:AuthService) {}
+  constructor(public auth:AuthService, private router: Router) {}
+
+  logout() {
+    this.auth.logout()
+    this.router.navigate(['/'])
+  }
 }

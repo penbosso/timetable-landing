@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, mapTo, catchError } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { config } from '../config';
 
 @Injectable({
@@ -10,7 +10,10 @@ import { config } from '../config';
 export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly RERESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: string;
+  private loggedUser: 'LOGGED_USER';
+
+  private eventAuthError = new BehaviorSubject<string>("");
+  eventAuthError$ = this.eventAuthError.asObservable();
 
   private authUrl = config.apiUrl + '/auth';
   private authUrlRefresh = config.apiUrl + '/auth/refresh';
@@ -22,14 +25,14 @@ export class AuthService {
             tap(res => this.doLoginUser(email, res)),
             mapTo(true),
             catchError(error => {
-              alert(error.error);
+              this.eventAuthError.next(error)
               return of(false);
             })
           );
   }
 
   logout() {
-    this.loggedUser = null;
+    localStorage.removeItem(this.loggedUser);
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.RERESH_TOKEN);
     return true;
@@ -52,11 +55,12 @@ export class AuthService {
   }
 
   getLoggedUser() {
-    return this.loggedUser;
+    return localStorage.getItem(this.loggedUser);
   }
 
   private doLoginUser(email: string, authResult) {
-    this.loggedUser = email;
+    // this.loggedUser = email;
+    localStorage.setItem(this.loggedUser, email);
     localStorage.setItem(this.JWT_TOKEN, authResult.accessToken);
     localStorage.setItem(this.RERESH_TOKEN, authResult.refreshToken);
   }

@@ -3,14 +3,14 @@ import { Schedule } from './schedule';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import {catchError} from 'rxjs/operators'
-import { config } from '../config';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScheduleService {
-  private scheduleUrl =  config.apiUrl + '/schedules';
-  private similarScheduleUrl = config.apiUrl + '/schedules/similar';
+  private scheduleUrl =  environment.apiUrl + '/schedules';
+  private similarScheduleUrl = environment.apiUrl + '/schedules/similar';
 
    constructor(private http: HttpClient) {
 
@@ -21,8 +21,8 @@ export class ScheduleService {
       catchError(this.handleError)
     );
   }
-  getSimilarSchedules(): Observable<Schedule[]> {
-    return this.http.get<Schedule[]>(this.similarScheduleUrl).pipe(
+  getSimilarSchedules(scheduleId): Observable<any> {
+    return this.http.get<any>(`${this.similarScheduleUrl}/${scheduleId}`).pipe(
       // tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );

@@ -1,4 +1,3 @@
-import { logging } from 'protractor';
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
