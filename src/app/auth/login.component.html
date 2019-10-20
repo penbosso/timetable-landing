@@ -5,7 +5,7 @@
         <div class="card-body">
           <h5 class="card-title text-center">Sign In</h5>
           <div *ngIf="errorMessage" class="row">
-            <div class="alert alert-danger">{{errorMessage?.message}}</div>
+            <div class="alert alert-danger">{{errorMessage.error?.message}}-{{errorMessage?.message}}</div>
           </div>
           <form class="form-signin"
                 (ngSubmit)="login()"

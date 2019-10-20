@@ -12,7 +12,7 @@
       <li class="nav-item"><a class="nav-link" href="#" routerLinkActive="active">My schedules</a></li>
     </ul>
     <ul class="nav nav-pills navbar-right">
-      <a *ngIf="auth.isLoggedIn()" class="nav-link">welcome {{ auth.getLoggedUser() }}</a>
+      <a *ngIf="auth.isLoggedIn()" class="nav-link">welcome {{ auth.getLoggedUser().name }}</a>
       <li *ngIf="auth.isLoggedIn()" class="nav-item"><a class="nav-link" type="button" (click)="logout()"  routerLinkActive="active"><span class="nav-link fa fa-sign-out"></span>Logout</a></li>
       <li *ngIf="!auth.isLoggedIn()" class="nav-item"><a class="nav-link" [routerLink]="['/signup']" routerLinkActive="active"><span class="nav-link fa fa-user"></span>Sign Up</a></li>
       <li *ngIf="!auth.isLoggedIn()" class="nav-item"><a class="nav-link" [routerLink]="['/login']" routerLinkActive="active"><span class="nav-link fa fa-sign-in"></span>Login</a></li>

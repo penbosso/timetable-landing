@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl = 'https://cstt.herokuapp.com/users';
+  private baseUrl = environment.apiUrl +'/users';
   constructor(private http: HttpClient) { }
 
   createUser(user: User): Observable<User> {
