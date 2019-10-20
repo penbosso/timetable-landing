@@ -27,8 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: 'login',
-        component: LoginComponent,
-      canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        component: LoginComponent
       }
     ])
   ]

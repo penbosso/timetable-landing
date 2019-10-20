@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, mapTo, catchError } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { config } from '../config';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -10,26 +11,29 @@ import { config } from '../config';
 export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly RERESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: string;
+  private loggedUser: 'LOGGED_USER';
 
-  private authUrl = config.apiUrl + '/auth';
-  private authUrlRefresh = config.apiUrl + '/auth/refresh';
+  private eventAuthError = new BehaviorSubject<string>("");
+  eventAuthError$ = this.eventAuthError.asObservable();
+
+  private authUrl = environment.apiUrl + '/auth';
+  private authUrlRefresh = environment.apiUrl + '/auth/refresh';
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<any>(this.authUrl, {email, password})
           .pipe(
-            tap(res => this.doLoginUser(email, res)),
+            tap(res => this.doLoginUser(res)),
             mapTo(true),
             catchError(error => {
-              alert(error.error);
+              this.eventAuthError.next(error)
               return of(false);
             })
           );
   }
 
   logout() {
-    this.loggedUser = null;
+    localStorage.removeItem(this.loggedUser);
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.RERESH_TOKEN);
     return true;
@@ -51,12 +55,33 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  getLoggedUser() {
-    return this.loggedUser;
+  isAdmin(): boolean {
+    if(+this.getLoggedUser().permission === 3) {
+      return true;
+    }
+    return false;
   }
 
-  private doLoginUser(email: string, authResult) {
-    this.loggedUser = email;
+  isEditor(): boolean  {
+    if(+this.getLoggedUser().permission > 1) {
+      return true;
+    }
+    return false;
+  }
+  getLoggedUser() {
+    return JSON.parse(localStorage.getItem(this.loggedUser));
+  }
+
+  private doLoginUser(authResult) {
+    const decoded = jwt_decode(authResult.accessToken);
+    const currentUser = JSON.stringify({
+      name: decoded["name"],
+      permission: decoded["permissionLevel"],
+      email: decoded["email"],
+      id: decoded["userId"]
+    });
+    console.log(currentUser );
+    localStorage.setItem(this.loggedUser, currentUser );
     localStorage.setItem(this.JWT_TOKEN, authResult.accessToken);
     localStorage.setItem(this.RERESH_TOKEN, authResult.refreshToken);
   }

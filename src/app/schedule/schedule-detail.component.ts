@@ -15,21 +15,20 @@ export class ScheduleDetailComponent implements OnInit, OnDestroy {
   errorMessage: string;
   schedule: Schedule;
   similarSchedules: Schedule[] = [];
-  private sub: Subscription;
+  private subscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private scheduleService: ScheduleService) { }
 
   ngOnInit() {
-    this.sub = this.route.paramMap.subscribe( params => {
+    this.subscription = this.route.paramMap.subscribe( params => {
       const id = params.get('id');
       //Find schedule and filter related course from schedules
-      this.scheduleService.getSchedules().subscribe(
-        schedules => {
-          this.similarSchedules = schedules;
-          this.schedule = this.findById(id, this.similarSchedules);
-          this.similarSchedules = this.filterByCourseId(this.schedule.course._id);
+      this.scheduleService.getSimilarSchedules(id).subscribe(
+        ({instantCourse, similarCourses}) => {
+          this.similarSchedules = similarCourses;
+          this.schedule = instantCourse;
         },
         error => this.errorMessage = <any>error
       );
@@ -38,15 +37,7 @@ export class ScheduleDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
-  filterByCourseId(courseId: string): Schedule[] {
-    return this.similarSchedules.filter((schedule: Schedule) => schedule.course._id.indexOf(courseId) !== -1);
-  }
-
-  findById(id: string, schedules: Schedule[]): Schedule {
-    return schedules.find((schedule: Schedule) => schedule._id === id );
+    this.subscription.unsubscribe();
   }
 
   onBack(): void {

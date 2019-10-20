@@ -5,6 +5,9 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           <h5 class="card-title text-center">Sign Up</h5>
+          <div *ngIf="errorMessage" class="row">
+            <div class="alert alert-danger">{{errorMessage?.message}}</div>
+          </div>
           <form class="form-signin"
                   (ngSubmit)="save()"
                   [formGroup]="userForm">
@@ -35,7 +38,6 @@
             <div class="form-label-group">
               <input type="email" id="inputEmail" class="form-control"
                       placeholder="Email address" required
-                      pattern="/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/"
                       formControlName="email"
                       [ngClass]="{'is-invalid': (userForm.get('email').touched || userForm.get('email').derty) && !userForm.get('email').valid}" />
                       <span class="invalid-feedback">

@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ScheduleComponent } from './schedule.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 
 
@@ -19,9 +20,17 @@ import { ScheduleComponent } from './schedule.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      {path: 'schedule', component: ScheduleComponent },
-      {path: 'schedules', component: ScheduleListComponent },
-      { path: 'schedules/:id', component: ScheduleDetailComponent },
+      {
+        path: 'schedule',
+        canActivate: [ AuthGuard],
+        component: ScheduleComponent },
+      {
+        path: 'schedules',
+        component: ScheduleListComponent
+      },
+      {
+        path: 'schedules/:id',
+        component: ScheduleDetailComponent },
     ])
   ]
 })
